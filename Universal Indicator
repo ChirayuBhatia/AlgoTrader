@@ -1,0 +1,153 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © ChirayuBhatia
+
+//@version=5
+strategy("Universal", overlay = true)
+
+////////////////
+// CONDITIONS //
+////////////////
+
+// ENTRY CONDITIONS
+
+Etype = input.string("Buy", "Entry Type", options = ['Buy', 'Sell'])
+quant = input.int(1, "Quantity")
+
+c1_1 = input.string("Indicator", "Entry Condition 1", options = ['Indicator','Open', 'High', 'Low', 'Close', 'MACD', 'MACD Signal', 'Supertrend', 'Moving Average 1', 'Moving Average 2', 'Moving Average 3', 'Exponential MA 1', 'Exponential MA 2', 'Exponential MA 3', 'VWAP', 'ADX', 'Number 1', 'Number 2', 'Number 3', 'Number 4'], inline = "Condition1", group = "Entry Conditions")
+c1_2 = input.string("Condition", "", options = ['Condition', 'greater than', 'greater or equal to', 'crossing above', 'equal to', 'less than', 'less or equal to', 'crossing below'], inline = "Condition1", group = "Entry Conditions")
+c1_3 = input.string("Indicator", "", options = ['Indicator','Open', 'High', 'Low', 'Close', 'MACD', 'MACD Signal', 'Supertrend', 'Moving Average 1', 'Moving Average 2', 'Moving Average 3', 'Exponential MA 1', 'Exponential MA 2', 'Exponential MA 3', 'VWAP', 'ADX', 'Number 1', 'Number 2', 'Number 3', 'Number 4'], inline = "Condition1", group = "Entry Conditions")
+
+c2_1 = input.string("Indicator", "Entry Condition 2", options = ['Indicator','Open', 'High', 'Low', 'Close', 'MACD', 'MACD Signal', 'Supertrend', 'Moving Average 1', 'Moving Average 2', 'Moving Average 3', 'Exponential MA 1', 'Exponential MA 2', 'Exponential MA 3', 'VWAP', 'ADX', 'Number 1', 'Number 2', 'Number 3', 'Number 4'], inline = "Condition2", group = "Entry Conditions")
+c2_2 = input.string("Condition", "", options = ['Condition', 'greater than', 'greater or equal to', 'crossing above', 'equal to', 'less than', 'less or equal to', 'crossing below'], inline = "Condition2", group = "Entry Conditions")
+c2_3 = input.string("Indicator", "", options = ['Indicator','Open', 'High', 'Low', 'Close', 'MACD', 'MACD Signal', 'Supertrend', 'Moving Average 1', 'Moving Average 2', 'Moving Average 3', 'Exponential MA 1', 'Exponential MA 2', 'Exponential MA 3', 'VWAP', 'ADX', 'Number 1', 'Number 2', 'Number 3', 'Number 4'], inline = "Condition2", group = "Entry Conditions")
+
+c3_1 = input.string("Indicator", "Entry Condition 3", options = ['Indicator','Open', 'High', 'Low', 'Close', 'MACD', 'MACD Signal', 'Supertrend', 'Moving Average 1', 'Moving Average 2', 'Moving Average 3', 'Exponential MA 1', 'Exponential MA 2', 'Exponential MA 3', 'VWAP', 'ADX', 'Number 1', 'Number 2', 'Number 3', 'Number 4'], inline = "Condition3", group = "Entry Conditions")
+c3_2 = input.string("Condition", "", options = ['Condition', 'greater than', 'greater or equal to', 'crossing above', 'equal to', 'less than', 'less or equal to', 'crossing below'], inline = "Condition3", group = "Entry Conditions")
+c3_3 = input.string("Indicator", "", options = ['Indicator','Open', 'High', 'Low', 'Close', 'MACD', 'MACD Signal', 'Supertrend', 'Moving Average 1', 'Moving Average 2', 'Moving Average 3', 'Exponential MA 1', 'Exponential MA 2', 'Exponential MA 3', 'VWAP', 'ADX', 'Number 1', 'Number 2', 'Number 3', 'Number 4'], inline = "Condition3", group = "Entry Conditions")
+
+c4_1 = input.string("Indicator", "Entry Condition 4", options = ['Indicator','Open', 'High', 'Low', 'Close', 'MACD', 'MACD Signal', 'Supertrend', 'Moving Average 1', 'Moving Average 2', 'Moving Average 3', 'Exponential MA 1', 'Exponential MA 2', 'Exponential MA 3', 'VWAP', 'ADX', 'Number 1', 'Number 2', 'Number 3', 'Number 4'], inline = "Condition4", group = "Entry Conditions")
+c4_2 = input.string("Condition", "", options = ['Condition', 'greater than', 'greater or equal to', 'crossing above', 'equal to', 'less than', 'less or equal to', 'crossing below'], inline = "Condition4", group = "Entry Conditions")
+c4_3 = input.string("Indicator", "", options = ['Indicator','Open', 'High', 'Low', 'Close', 'MACD', 'MACD Signal', 'Supertrend', 'Moving Average 1', 'Moving Average 2', 'Moving Average 3', 'Exponential MA 1', 'Exponential MA 2', 'Exponential MA 3', 'VWAP', 'ADX', 'Number 1', 'Number 2', 'Number 3', 'Number 4'], inline = "Condition4", group = "Entry Conditions")
+
+// EXIT CONDITIONS
+c5_1 = input.string("Indicator", "Exit Condition 1", options = ['Indicator','Open', 'High', 'Low', 'Close', 'MACD', 'MACD Signal', 'Supertrend', 'Moving Average 1', 'Moving Average 2', 'Moving Average 3', 'Exponential MA 1', 'Exponential MA 2', 'Exponential MA 3', 'VWAP', 'ADX', 'Number 1', 'Number 2', 'Number 3', 'Number 4'], inline = "Condition5", group = "Exit Conditions")
+c5_2 = input.string("Condition", "", options = ['Condition', 'greater than', 'greater or equal to', 'crossing above', 'equal to', 'less than', 'less or equal to', 'crossing below'], inline = "Condition5", group = "Exit Conditions")
+c5_3 = input.string("Indicator", "", options = ['Indicator','Open', 'High', 'Low', 'Close', 'MACD', 'MACD Signal', 'Supertrend', 'Moving Average 1', 'Moving Average 2', 'Moving Average 3', 'Exponential MA 1', 'Exponential MA 2', 'Exponential MA 3', 'VWAP', 'ADX', 'Number 1', 'Number 2', 'Number 3', 'Number 4'], inline = "Condition5", group = "Exit Conditions")
+
+c6_1 = input.string("Indicator", "Exit Condition 2", options = ['Indicator','Open', 'High', 'Low', 'Close', 'MACD', 'MACD Signal', 'Supertrend', 'Moving Average 1', 'Moving Average 2', 'Moving Average 3', 'Exponential MA 1', 'Exponential MA 2', 'Exponential MA 3', 'VWAP', 'ADX', 'Number 1', 'Number 2', 'Number 3', 'Number 4'], inline = "Condition6", group = "Exit Conditions")
+c6_2 = input.string("Condition", "", options = ['Condition', 'greater than', 'greater or equal to', 'crossing above', 'equal to', 'less than', 'less or equal to', 'crossing below'], inline = "Condition6", group = "Exit Conditions")
+c6_3 = input.string("Indicator", "", options = ['Indicator','Open', 'High', 'Low', 'Close', 'MACD', 'MACD Signal', 'Supertrend', 'Moving Average 1', 'Moving Average 2', 'Moving Average 3', 'Exponential MA 1', 'Exponential MA 2', 'Exponential MA 3', 'VWAP', 'ADX', 'Number 1', 'Number 2', 'Number 3', 'Number 4'], inline = "Condition6", group = "Exit Conditions")
+
+c7_1 = input.string("Indicator", "Exit Condition 3", options = ['Indicator','Open', 'High', 'Low', 'Close', 'MACD', 'MACD Signal', 'Supertrend', 'Moving Average 1', 'Moving Average 2', 'Moving Average 3', 'Exponential MA 1', 'Exponential MA 2', 'Exponential MA 3', 'VWAP', 'ADX', 'Number 1', 'Number 2', 'Number 3', 'Number 4'], inline = "Condition7", group = "Exit Conditions")
+c7_2 = input.string("Condition", "", options = ['Condition', 'greater than', 'greater or equal to', 'crossing above', 'equal to', 'less than', 'less or equal to', 'crossing below'], inline = "Condition7", group = "Exit Conditions")
+c7_3 = input.string("Indicator", "", options = ['Indicator','Open', 'High', 'Low', 'Close', 'MACD', 'MACD Signal', 'Supertrend', 'Moving Average 1', 'Moving Average 2', 'Moving Average 3', 'Exponential MA 1', 'Exponential MA 2', 'Exponential MA 3', 'VWAP', 'ADX', 'Number 1', 'Number 2', 'Number 3', 'Number 4'], inline = "Condition7", group = "Exit Conditions")
+
+// ['Indicator','Open', 'High', 'Low', 'Close', 'MACD', 'MACD Signal', 'Supertrend', 'Moving Average 1', 'Moving Average 2', 'Moving Average 3', 'Exponential MA 1', 'Exponential MA 2', 'Exponential MA 3', 'VWAP', 'ADX', 'Number 1', 'Number 2', 'Number 3', 'Number 4']
+
+
+////////////////
+// INDICATORS //
+////////////////
+
+// Moving Average
+ma1 = input.int(5, "Moving Average 1", group = "Moving Average")
+ma2 = input.int(5, "Moving Average 2", group = "Moving Average")
+ma3 = input.int(5, "Moving Average 3", group = "Moving Average")
+
+// Exponential Moving Average
+ema1 = input.int(5, "Exponential MA 1", group = "Exponential Moving Average")
+ema2 = input.int(5, "Exponential MA 2", group = "Exponential Moving Average")
+ema3 = input.int(5, "Exponential MA 3", group = "Exponential Moving Average")
+
+// MACD
+source_macd = input.source(close, "Source", group="MACD")
+fma_macd = input.int(12, "Fast MA", group="MACD")
+sma_macd = input.int(26, "Slow MA", group="MACD")
+sig_macd = input.int(9, "Signal", group="MACD")
+MACD() =>
+    [macd, _, _] = ta.macd(source_macd, fma_macd, sma_macd, sig_macd)
+    macd
+
+MACD_Signal() =>
+    [_, Signal, _] = ta.macd(source_macd, fma_macd, sma_macd, sig_macd)
+    Signal
+
+// Supertrend
+supertrendFac = input.float(3, "Factor", group = "Supertrend")
+supertrendPer = input.int(10, "Period", group = "Supertrend")
+Supertrend() =>
+    [Sup, _] = ta.supertrend(supertrendFac, supertrendPer)
+    Sup
+
+// ADX
+adxPer = input.int(14, "Period", group = "ADX")
+adxSPer = input.int(14, "Smoothing Period", group = "ADX")
+ADX() =>
+    [_, _, adx] = ta.dmi(adxPer, adxSPer)
+    adx
+
+// Number
+no1 = input.float(0, "Number 1", group = "Number", inline = "1")
+no2 = input.float(0, "Number 2", group = "Number", inline = "1")
+no3 = input.float(0, "Number 3", group = "Number", inline = "2")
+no4 = input.float(0, "Number 4", group = "Number", inline = "2")
+
+///////////////
+// FUNCTIONS //
+///////////////
+
+EntryType(Etype) => Etype == "Buy" ? strategy.long : strategy.short
+
+indicate(I) =>
+    indi = switch I
+        "Indicator" => 99999.99
+        "Number 1" => no1
+        "Number 2" => no2
+        "Number 3" => no3
+        "Number 4" => no4
+        "Open" => open
+        "High" => high
+        "Low" => low
+        "Close" => close
+        "MACD" => MACD()
+        "MACD Signal" => MACD_Signal()
+        "Moving Average 1" => ta.sma(close, ma1)
+        "Moving Average 2" => ta.sma(close, ma2)
+        "Moving Average 3" => ta.sma(close, ma3)
+        "Exponential MA 1" => ta.ema(close, ema1)
+        "Exponential MA 2" => ta.ema(close, ema2)
+        "Exponential MA 3" => ta.ema(close, ema3)
+        "Supertrend" => Supertrend()
+        "VWAP" => ta.vwap
+        "ADX" => ADX()
+    indi
+
+checkCondition(I1, I2, Condition, typ="Entry") =>
+    I_1 = indicate(I1)
+    I_2 = indicate(I2)
+    ans = switch Condition
+        "Condition" => typ == "Entry" ? true : false
+        "greater than" => I_1 > I_2
+        "less than" => I_1 < I_2
+        "greater or equal to" => I_1 >= I_2
+        "less or equal to" => I_1 <= I_2
+        "equal" => I_1 == I_2
+        "crossing above" => ta.crossover(I_1, I_2)
+        "crossing below" => ta.crossunder(I_1, I_2)
+    ans
+
+// Entry
+cn1 = checkCondition(c1_1, c1_3, c1_2)
+cn2 = checkCondition(c2_1, c2_3, c2_2)
+cn3 = checkCondition(c3_1, c3_3, c3_2)
+cn4 = checkCondition(c4_1, c4_3, c4_2)
+// Exit
+cn5 = checkCondition(c5_1, c5_3, c5_2, "Exit")
+cn6 = checkCondition(c6_1, c6_3, c6_2, "Exit")
+cn7 = checkCondition(c7_1, c7_3, c7_2, "Exit")
+
+if ((strategy.position_size == 0) and (cn1 and cn2 and cn3 and cn4))
+    strategy.entry("Entry", EntryType(Etype), quant)
+
+if ((strategy.position_size != 0) and (cn5 or cn6 or cn7))
+    strategy.close("Entry", "Exit", quant)
