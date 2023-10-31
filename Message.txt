@@ -1,0 +1,3 @@
+{"exchange_segment": {{exchange}}, "trading_symbol": {{ticker}},"price": {{strategy.order.price}}, "quantity": {{strategy.market_position_size}}, "transaction_type":{{strategy.order.action}}}
+
+validity

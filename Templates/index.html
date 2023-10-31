@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <h1>Login</h1>
+    <form action="/login" method="post">
+        <label for="consumer_key">Consumer Key:</label>
+        <input type="text" id="consumer_key" name="consumer_key"><br><br>
+
+        <label for="consumer_secret">Consumer Secret:</label>
+        <input type="text" id="consumer_secret" name="consumer_secret"><br><br>
+
+        <label for="passcode">Password:</label>
+        <input type="password" id="passcode" name="passcode"><br><br>
+
+        <label for="mpin">MPIN:</label>
+        <input type="text" id="mpin" name="mpin"><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
