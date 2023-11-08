@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from neo_api_client import NeoAPI
 
+ex_seg = {"NSE": "nse_cm", "BSE": "bse_cm", "NFO": "nse_fo", "BFO": "bse_fo", "CDS": "cde_fo", "MCX": "mcx_fo"}
 app = Flask(__name__)
 client = None
 
@@ -37,14 +38,19 @@ def dashboard():
     return "Please login first."
 
 
-@app.route('/webhook', methods=["POST"])
+@app.route('/webhook', methods=["GET", "POST"])
 def webhook():
-    global client
+    global client, ex_seg
+    print(client)
     if client and request.method == 'POST':
         dictionary = request.json
-        print(dictionary)
-        return request.json
-    return redirect(url_for('login'))
+        return client.place_order(exchange_segment=ex_seg[dictionary["exchange_segment"]], product="NRML",
+                                  order_type="MKT", quantity=dictionary["quantity"], validity="DAY",
+                                  trading_symbol=f"{dictionary['trading_symbol']}-EQ",
+                                  transaction_type="B" if dictionary["transaction_type"] == 'buy' else "S")
+
+    else:
+        return redirect(url_for("index"))
 
 
 if __name__ == '__main__':

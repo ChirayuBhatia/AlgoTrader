@@ -1,3 +1,2 @@
 {"exchange_segment": {{exchange}}, "trading_symbol": {{ticker}},"price": {{strategy.order.price}}, "quantity": {{strategy.market_position_size}}, "transaction_type":{{strategy.order.action}}}
-
-validity
+{"exchange_segment": "NSE", "trading_symbol": "SBIN","price": 579.95, "quantity": 1, "transaction_type":"sell"}
