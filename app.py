@@ -6,6 +6,24 @@ app = Flask(__name__)
 client = None
 
 
+def on_message(message):
+    print('[Res]: ', message)
+
+
+def on_error(message):
+    result = message
+    print('[OnError]: ', result)
+
+
+def on_open(message):
+    print('[OnOpen]: ', message)
+
+
+def on_close(message):
+    print('[OnClose]: ', message)
+
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
