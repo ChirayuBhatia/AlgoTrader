@@ -1,3 +1,4 @@
+pip==23.3.1
 flask
 neo_api_client @ git+https://github.com/Kotak-Neo/kotak-neo-api.git#egg=neo_api_client
 Flask-SocketIO
