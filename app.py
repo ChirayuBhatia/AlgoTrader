@@ -4,7 +4,7 @@ from flask_socketio import SocketIO
 from datetime import datetime
 
 ex_seg = {"NSE": "nse_cm", "BSE": "bse_cm", "NFO": "nse_fo", "BFO": "bse_fo", "CDS": "cde_fo", "MCX": "mcx_fo"}
-app = Flask(__name__)
+app = Flask(__name__, template_folder='Templates', static_folder='Static')
 socketio = SocketIO(app)
 client = None
 
@@ -76,5 +76,5 @@ def webhook():
         return redirect(url_for("index"))
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
