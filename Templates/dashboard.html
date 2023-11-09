@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body>
+    <h1>Order Logs</h1>
+    <ul id="log-list" style="list-style-type:none;">
+        {% for log in logs %}
+            <li>{{ log }}</li>
+        {% endfor %}
+    </ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        socket.on('new_log', function(data) {
+            var logList = document.getElementById('log-list');
+            var newLog = document.createElement('li');
+            newLog.appendChild(document.createTextNode(data));
+            logList.appendChild(newLog);
+        });
+    </script>
+</body>
+</html>
