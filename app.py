@@ -72,6 +72,8 @@ def webhook():
                                   order_type="MKT", quantity=dictionary["quantity"], validity="DAY",
                                   trading_symbol=f"{dictionary['trading_symbol']}-EQ",
                                   transaction_type="B" if dictionary["transaction_type"] == 'buy' else "S")
+    elif request.method == 'POST':
+        return "Please Login First"
     else:
         return redirect(url_for("index"))
 
