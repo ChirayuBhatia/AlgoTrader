@@ -76,7 +76,7 @@ def webhook():
                                  f'{"Bought" if dictionary["transaction_type"] == "buy" else "Sold"} '
                                  f'{dictionary["quantity"]} Quantity of {dictionary["trading_symbol"]} '
                                  f'@ {dictionary["price"]}')
-        return client.place_order(exchange_segment=ex_seg[dictionary["exchange_segment"]], product="NRML",
+        return client.place_order(exchange_segment=ex_seg[dictionary["exchange_segment"]], product="MIS",
                                   order_type="MKT", quantity=dictionary["quantity"], validity="DAY",
                                   trading_symbol=f"{dictionary['trading_symbol']}-EQ",
                                   transaction_type="B" if dictionary["transaction_type"] == 'buy' else "S")
