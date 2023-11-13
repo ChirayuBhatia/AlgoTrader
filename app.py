@@ -31,7 +31,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     global client
 
@@ -57,6 +57,14 @@ def dashboard():
         return render_template("dashboard.html")
 
     return "Please login first."
+
+
+@app.route('/logout')
+def logout():
+    global client
+    client.logout()
+    client = None
+    return redirect(url_for('index'))
 
 
 @app.route('/webhook', methods=["GET", "POST"])
