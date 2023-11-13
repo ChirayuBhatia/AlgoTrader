@@ -78,7 +78,7 @@ def webhook():
                                  f'@ {dictionary["price"]}')
         return client.place_order(exchange_segment=ex_seg[dictionary["exchange_segment"]], product="MIS",
                                   order_type="MKT", quantity=dictionary["quantity"], validity="DAY",
-                                  trading_symbol=f"{dictionary['trading_symbol']}-EQ",
+                                  trading_symbol=f"{dictionary['trading_symbol']}-EQ", price=dictionary['price'],
                                   transaction_type="B" if dictionary["transaction_type"] == 'buy' else "S")
     elif request.method == 'POST':
         return "Please Login First"
