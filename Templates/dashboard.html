@@ -6,7 +6,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
 </head>
 <body>
-<h1>Order Logs</h1>
+    <div class="header">
+
+        <h1>Order Logs</h1>
+
+        <div id="clock" class="clock"></div>
+    </div>
 
     <ul id="log-list" style="list-style-type:none;">
         {% for log in logs %}
@@ -14,17 +19,11 @@
         {% endfor %}
     </ul>
 
-<a href={{url_for('logout')}}>Click Here to Logout</a>
+    <a href={{url_for('logout')}}>Click Here to Logout</a>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
-    <script>
-        var socket = io.connect('http://' + document.domain + ':' + location.port);
-        socket.on('new_log', function(data) {
-            var logList = document.getElementById('log-list');
-            var newLog = document.createElement('li');
-            newLog.appendChild(document.createTextNode(data));
-            logList.appendChild(newLog);
-        });
-    </script>
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+
 </body>
+
 </html>
