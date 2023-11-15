@@ -86,5 +86,13 @@ def webhook():
         return redirect(url_for("index"))
 
 
+@app.route('/runner', methods=["POST"])
+def runner():
+    if client:
+        return "Ohk"
+    else:
+        return "Login Again"
+
+
 # if __name__ == '__main__':
 #     app.run(debug=True)
