@@ -4,3 +4,4 @@ neo_api_client @ git+https://github.com/ChirayuBhatia/kotak-neo-api.git#egg=neo_
 Gunicorn
 flask-wtf
 wtforms
+Flask-SQLAlchemy
