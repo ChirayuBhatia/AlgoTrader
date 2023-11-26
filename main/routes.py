@@ -1,5 +1,4 @@
 from flask import render_template, request, redirect, url_for, flash
-from flask_login import login_user, logout_user, login_required
 from neo_api_client import NeoAPI
 from main.forms import LoginForm
 from main.models import Order, db
@@ -54,7 +53,7 @@ def webhook():
             new_log = {
                 "Time": datetime.now().time(),
                 "ExchangeSegment": ex_seg[dictionary["exchange_segment"]],
-                "Symbol": dictionary["trading_symbol"]+"EQ",
+                "Symbol": dictionary["trading_symbol"]+"-EQ",
                 "TransactionType": "B" if dictionary["transaction_type"] == "buy" else "S",
                 "Quantity": dictionary["quantity"],
                 "Price": dictionary["price"],
