@@ -1,0 +1,53 @@
+{% extends 'template.html' %}
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block content %}
+<head>
+    <meta http-equiv="refresh" content="300">
+</head>
+    <h1 style="width:100%; text-align: center;">Orders Logs</h1>
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <!-- Your Columns HERE -->
+                <th scope="col">Time</th>
+                <th scope="col">Symbol</th>
+                <th scope="col">Transaction Type</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+                <tr>
+                    <td>{{ log.time }}</td>
+                    <td>{{ log.sym }}</td>
+                    <td>{{ log.transactionType }}</td>
+                    <td>{{ log.qty }}</td>
+                    <td>{{ log.price }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<script>
+    function updateClock() {
+        var now = new Date();
+        var hours = now.getHours().toString().padStart(2, '0');
+        var minutes = now.getMinutes().toString().padStart(2, '0');
+        var seconds = now.getSeconds().toString().padStart(2, '0');
+        var formattedTime = hours + ':' + minutes + ':' + seconds;
+
+        var clockElement = document.getElementById('clock');
+        clockElement.textContent = formattedTime;
+    }
+
+    // Update the clock every second
+    setInterval(updateClock, 1000);
+
+    // Initial clock update
+    updateClock();
+
+</script>
+{% endblock %}

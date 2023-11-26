@@ -1,0 +1,25 @@
+{% extends 'template.html' %}
+{% block title %}
+        Login
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <form class="form-login" method="POST" style="color:white">
+            {{ loginForm.hidden_tag() }}
+            <h1 class="h1 mb-3 font-weight-normal">Login</h1>
+            <br>
+            {{ loginForm.mobileNumber.label() }}
+            {{ loginForm.mobileNumber(class="form-control", placeholder="+91XXXXXXXXXX")}}
+            {{ loginForm.consumerKey.label() }}
+            {{ loginForm.consumerKey(class="form-control", placeholder="Consumer Key")}}
+            {{ loginForm.consumerSecret.label() }}
+            {{ loginForm.consumerSecret(class="form-control", placeholder="Consumer Secret")}}
+            {{ loginForm.password.label() }}
+            {{ loginForm.password(class="form-control", placeholder="Password")}}
+            {{ loginForm.mpin.label() }}
+            {{ loginForm.mpin(class="form-control", placeholder="MPIN")}}
+            <br><br>
+            {{ loginForm.submit(class="btn btn-lg btn-block btn-primary") }}
+        </form>
+    </div>
+{% endblock %}
