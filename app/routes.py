@@ -1,9 +1,9 @@
 from flask import render_template, request, redirect, url_for, flash
 from neo_api_client import NeoAPI
-from main.forms import LoginForm
-from main.models import Order, db
+from app.forms import LoginForm
+from app.models import Order, db
 from datetime import datetime
-from main import app
+from app import app
 
 
 ex_seg = {"NSE": "nse_cm", "BSE": "bse_cm", "NFO": "nse_fo", "BFO": "bse_fo", "CDS": "cde_fo", "MCX": "mcx_fo"}
